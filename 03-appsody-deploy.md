@@ -284,3 +284,58 @@ You can then use a browser to open the frontend application, at the url given ab
 **Congratulations**! You have now deployed both front and backend applications to OpenShift, hooked them together as well as enable outreach to an external service.
 
 In general, using appsody to deploy your application in this fashion is recommended only to enable additional testing within a Docker or Kubernetes environment. As you are probably aware, using such a manual approach inside formal test, staging and production environments doesn't solve the problems of maintaining consistency, repeatability and control. In later exercises we will learn how to use appsody and kabanero to achieve these - using a Tekton pipeline, hooked to a git repository of the code of the application, ensuring triggering of automated builds and deployments. This is the recommended methodology supported by Kabanero and Cloud Pak for Applications
+
+## Bonus: Using actual data from the Dacadoo API
+
+To get acutal values and not only mocked data, the Dacadoo API can be used.
+
+In order for the backend application to access the Dacadoo Health Score API, visit <https://models.dacadoo.com/doc/> to register and request an API key for evaluation purposes. Access to this API is usually granted individually to those that apply. You need to record the `url` for the API (displayed by clicking on the Health Score link under Models - usually `https://models.dacadoo.com/score/2`) and the `Key` (something similar to `UFDzMHAfsEg0oKzGp4rCSmXPClKKq3hDPLbPdvc2h`).
+
+### Create a config map for the Dacadoo API key
+
+In order to have the backend application send requests to the Dacadoo Health Score API, we need to create a secret that contains the configuration for making requests to the Dacadoo server, that you obtained in the pre-requisites of this exercise. (Note: If you do not want to use the Dacadoo Health Score API, you can skip this setup and continue to use the mock endpoint.)
+
+```bash
+oc create configmap dacadoo-config --from-literal=DACADOO_URL=<url> --from-literal=DACADOO_APIKEY=<apikey>
+```
+
+where:
+
+- `<url>` is the URL of the Dacadoo server (usually `https://models.dacadoo.com/score/2`)
+- `<apikey>` is the API key that you obtained when you registered to use the API.
+
+for example:
+
+```bash
+oc create configmap dacadoo-config --from-literal=DACADOO_URL=https://models.dacadoo.com/score/2 --from-literal=DACADOO_APIKEY=Y3VB...RMGG
+configmap/dacadoo-config created
+```
+
+### Change the deployment file
+
+We need to add a section to the generated file `app-deploy.yml`. Under the `spec` key, create a new `envFrom` key that has the value of your OpenShift config map. `dacadoo-config` was used as the name in this workshop.
+
+> **TIP**: Ensure there are two spaces before `name`, see <https://github.com/kubernetes/kubernetes/issues/46826#issuecomment-305728020>
+
+```yaml
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  name: quote-backend
+spec:
+  .
+  .
+  envFrom:
+    - configMapRef:
+        name: dacadoo-config
+  expose: true
+  createKnativeService: false
+```
+
+Now use `appsody deploy` to push the image, with a new tag and deploy the application again.
+
+```bash
+appsody deploy --tag <your-namespace>/quote-frontend:v2 --push-url $IMAGE_REGISTRY --push --pull-url image-registry.openshift-image-registry.svc:5000 --namespace <your-namespace>
+```
+
+Now you should get actual data from the API.
