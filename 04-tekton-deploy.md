@@ -243,8 +243,8 @@ This should trigger another pipeline run to be created, using the `nodejs-expres
 Wait until the task is complete, then find the route using `oc get routes`:
 
 ```bash
-$ oc get routes -n insurance-quote | grep frontend
-quote-frontend     quote-frontend-insurance-quote.cp4apps-workshop-prop-5290c8c8e5797924dc1ad5d1b85b37c0-0001.us-east.containers.appdomain.cloud
+$ oc get routes -n <your-namespace> | grep frontend
+quote-frontend     quote-frontend-<your-namespace>.....containers.appdomain.cloud
 ```
 
 Open a browser to `http://<url-from-above>` and see the usual interface for the insurance quote app. Try entering information to ensure the frontend and backend are communicating.
