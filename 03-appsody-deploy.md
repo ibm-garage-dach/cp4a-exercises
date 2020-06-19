@@ -235,7 +235,7 @@ spec:
   createKnativeService: false
   env:
   - name: BACKEND_URL
-    value: quote-backend2-dev-tw.cp4a-dach-838396-ddd93d3a0fef01f6b396b69d343df410-0000.eu-de.containers.appdomain.cloud/quote
+    value: http://quote-backend2-dev-tw.cp4a-dach-838396-ddd93d3a0fef01f6b396b69d343df410-0000.eu-de.containers.appdomain.cloud/quote
   .
   .
   .
@@ -251,11 +251,33 @@ appsody deploy --tag <your-namespace>/quote-frontend:v1 --push-url $IMAGE_REGIST
 $ appsody deploy --tag dev-tw/quote-frontend2:v1 --push-url $IMAGE_REGISTRY --push --pull-url image-registry.openshift-image-registry.svc:5000 --namespace dev-tw
 .
 .
+[Docker] Successfully built a757274fd2b1
+[Docker] Successfully tagged registry-openshift-image-registry.cp4a-dach-838396-ddd93d3a0fef01f6b396b69d343df410-0000.eu-de.containers.appdomain.cloud/dev-tw/quote-frontend2:v1
+Pushing image registry-openshift-image-registry.cp4a-dach-838396-ddd93d3a0fef01f6b396b69d343df410-0000.eu-de.containers.appdomain.cloud/dev-tw/quote-frontend2:v1
+Built docker image registry-openshift-image-registry.cp4a-dach-838396-ddd93d3a0fef01f6b396b69d343df410-0000.eu-de.containers.appdomain.cloud/dev-tw/quote-frontend2:v1
+Found existing deployment manifest /Users/tobias/workspaces/learning/cp4a/quote-frontend2/app-deploy.yaml
+Updated existing deployment manifest /Users/tobias/workspaces/learning/cp4a/quote-frontend2/app-deploy.yaml
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get pods "-o=jsonpath='{.items[?(@.metadata.labels.name==\"appsody-operator\")].metadata.namespace}'" --all-namespaces
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get deployments "-o=jsonpath='{.items[?(@.metadata.name==\"appsody-operator\")].metadata.namespace}'" -n openshift-operators
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get pod "-o=jsonpath='{.items[?(@.metadata.labels.name==\"appsody-operator\")].metadata.name}'" -n openshift-operators
+Attempting to get resource from Kubernetes ...
+Running command: kubectl exec -n openshift-operators -it appsody-operator-849cd8b475-p9klr -- /bin/printenv WATCH_NAMESPACE
+An operator exists in namespace openshift-operators, that is watching all namespaces
+Attempting to apply resource in Kubernetes ...
+Running command: kubectl apply -f /Users/tobias/workspaces/learning/cp4a/quote-frontend2/app-deploy.yaml --namespace dev-tw
+Appsody Deployment name is: quote-frontend2
+Running command: kubectl get rt quote-frontend2 -o "jsonpath=\"{.status.url}\"" --namespace dev-tw
+Attempting to get resource from Kubernetes ...
+Running command: kubectl get route quote-frontend2 -o "jsonpath={.status.ingress[0].host}" --namespace dev-tw
+Deployed project running at quote-frontend2-dev-tw.cp4a-dach-838396-ddd93d3a0fef01f6b396b69d343df410-0000.eu-de.containers.appdomain.cloud
 ```
 
 > NOTE: The deployment might take a while, because of the large image being pushed to the registry from your local machine.
 
-You can then use a browser to open the frontend application, at the url given above (in the example above the URL is `quote-frontend-insurance-quote.cp4apps-workshop-prop-5290c8c8e5797924dc1ad5d1b85b37c0-0001.us-east.containers.appdomain.cloud`). Fill in the form and click the button to submit it. You should get a quote from the backend application.
+You can then use a browser to open the frontend application, at the url given above (in the example above the URL is `http://quote-frontend2-dev-tw.cp4a-dach-838396-ddd93d3a0fef01f6b396b69d343df410-0000.eu-de.containers.appdomain.cloud/quote`). Fill in the form and click the button to submit it. You should get a quote from the backend application.
 
 ![Sample web form](images-03/screenshot.png)
 
