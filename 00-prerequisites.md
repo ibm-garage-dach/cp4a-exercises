@@ -17,6 +17,7 @@ To perform all the steps in the exercises the following tools need to be install
 - [Appsody CLI](https://appsody.dev/docs/getting-started/installation)
 - [OpenShift CLI](https://www.okd.io/download.html)
 - [VSCode](https://code.visualstudio.com/download) with [Codewind](https://code.visualstudio.com/download) extension
+- Java Development Kit 11 (e.g. [OpenJDK](https://openjdk.java.net/install/))
 
 ## Access to an OpenShift Cluster with Cloud Pak for Applications installed
 
