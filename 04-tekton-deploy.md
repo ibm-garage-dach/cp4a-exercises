@@ -174,7 +174,7 @@ Configure the GitHub webhook to your repo. Go to `Webhooks` > `Add Webhook` and 
 
 ![new webhook options](images-04/create-tekton-webhook.png)
 
-Note that the first time creating a webhook a new access token must also be created, use the access token from the earlier step:
+Note that the first time creating a webhook a new access token must also be created. Click on the plus sign and use the access token from the earlier step:
 
 ![Create an access token](images-04/create-token.png)
 
