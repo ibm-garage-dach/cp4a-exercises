@@ -314,7 +314,7 @@ Refresh the browser to see the changes:
 
 ![Updated App View](images-01/js_lab1_endpoint_test.png)
 
-You can attach to the Node.js debugger using VS Code. To access the debug view use View -> Debug or click Debug icon on left menu:
+You can attach to the Node.js debugger using VS Code. To access the debug view use View -> Run or click Run/Debug icon on left menu:
 
 ![Enable Debug](images-01/js_lab1_vscode_debug.png)
 
