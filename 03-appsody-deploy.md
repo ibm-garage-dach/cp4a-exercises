@@ -64,7 +64,7 @@ oc project openshift-image-registry
 oc create route reencrypt registry --service=image-registry
 ```
 
-Rerunning `oc get route` command should then show the newly created route, with a URL looking something like this: `registry-openshift-image-registry.cp4a-dach-....eu-de.containers.appdomain.cloud`.
+Rerunning `oc get route` command should then show the newly created route, with a URL looking something like this: `registry-openshift-image-registry.....eu-de.containers.appdomain.cloud`.
 
 Once we have the URL, set it as a variable (omit the protocol - no `https://` etc...):
 
