@@ -1,0 +1,10 @@
+/poll "Prerequisites" "IBM Cloud Account" "Zugriff auf Cluster" "Github.com Account" "Docker" "Appsody CLI" "OC CLI" "VSCode" "VSCode mit Codewind"
+
+/poll "Progress Exercise 1" "List Appsody stacks" "Add Collection to Appsody" "Create a new application with Appsody" "Run, Test, Debug and Build the application"  "Execute Appsody commands from VSCode" "Add Application to Codewind" "Run and access the application from Codewind" "Application Performance, Monitor and Profiling with Codewind"
+
+/poll "Progress Exercise 2" "Frontend Application" "Backend Application"
+
+/poll "Progress Exercise 3" "OpenShift project created" "Access to container registry" "Deploy Backend" "Deploy Frontend" "Bonus"
+
+/poll "Progress Exercise 4" "Deployments deleted" "Access Tekton Dashboard" "Visited Pipelines, Tasks etc." "Namespace specified" "Github Access token created" "Uploaded backend and frontend to Github" "Created webhooks for frontend and backend" "Webhook trigger and successfull pipeline run for backend" "Webhook trigger and successfull pipeline run for frontend"
+
